@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   title = 'Palabras repetidas';
   formGroup: FormGroup = this.formWords();
 
-
   constructor(
     private fb: FormBuilder
   ) {
@@ -33,10 +32,11 @@ export class AppComponent implements OnInit {
   }
 
   searchWordRepeat(text: string) {
-    let textWithoutDotOrCommas = text.replace(/[.*\,]/g, '');
+    let textWithoutDotOrCommas = text.replace(/[.*\,]/g, "").replace(/(\r\n|\n|\r)/gm, " ").toLowerCase();
+
     let textArray = textWithoutDotOrCommas.split(" ");
     let wordsRepeatAndCount = [];
-
+    debugger;
     const dataArr = new Set(textArray);
     let textWithoutRepeatedWords = [...dataArr];
 
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
       let wordsRepeat = textArray.filter(t => t == textWithoutRepeatedWords[i]);
 
       if (wordsRepeat && wordsRepeat.length > 1) {
-        wordsRepeatAndCount.push({ word: textArray[i], count: wordsRepeat.length });
+        wordsRepeatAndCount.push({ word: textWithoutRepeatedWords[i], count: wordsRepeat.length });
       }
     }
     this.dataSource = wordsRepeatAndCount;
