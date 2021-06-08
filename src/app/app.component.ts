@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
 
     let textArray = textWithoutDotOrCommas.split(" ");
     let wordsRepeatAndCount = [];
-    debugger;
     const dataArr = new Set(textArray);
     let textWithoutRepeatedWords = [...dataArr];
 
